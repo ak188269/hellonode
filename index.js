@@ -1,55 +1,37 @@
-import  express  from "express";
-import dotenv from 'dotenv'
-import cors from "cors";
-import bodyParser from "body-parser";
-import startDb from "./database.js";
-import User from "./user.js";
+const express=require("express");
 const app=express();
+const dotenv=require("dotenv");
+const jwt=require('jsonwebtoken');
+const bodyParser=require("body-parser");
+const cookieParser=require("cookie-parser");
+const startDatabase=require("./database/db");
+const cloudinary=require("cloudinary").v2;
 dotenv.config({path:"./config.env"});
-app.use(cors({origin:"*",credentials:true}));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
-const PORT=process.env.PORT || 8000;
-startDb();
-app.route("/").get((req,res)=>{
-    res.send("welcome to node app");
-})
-app.route("/env").get((req,res)=>{
-    res.send({env:process.env.DATABASE_URL});
-})
-
-app.get("/get",async(req,res)=>{
-  try {
-     console.log("get is called");
-    const data={
-        name:"bittu",
-        email:"ak122@gmail.com",
-        password:"password"
-    }
-   const user= await User.create({
-   ...data
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET_KEY
 });
-    res.json({user})
 
-
-}
-
-    
-catch(err) {
-    res.json({success: false, error: err.message});
-}
-}
-    )
-
-app.get("/data/:name",(req, res) => {
-    const {name} = req.params;
-        res.send({
-            name,
-            email:"ak122@gmail.com",
-            password:"password"
-        });
-    })
-
-app.listen(PORT,()=>{
-    // console.log("App is running on ",PORT);
+const PORT=process.env.PORT || 8000;
+app.use(bodyParser.json({limit:"10mb"}));
+// app.use(express.json({limit:"10mb"}));
+// app.use(express.urlencoded({extended:true,limit:"10mb"}));
+const cors=require("cors");
+const auth = require("./middleware/Auth");
+app.use(bodyParser.urlencoded({extended:true,limit:"10mb"}));
+// *************** for cors errror ********************
+app.use(cors({origin:["http://localhost:3000"],credentials:true}));
+app.use(cookieParser());
+startDatabase();
+app.get("/",(req,res)=>{
+  res.send("Welcome to Node app");
 })
+// ****** managing user authentication ************
+// app.use("/api/user",require("./controllers/User"))
+app.use("/api/v1/post",require("./routes/Post"))
+app.use("/api/v1/user",require("./routes/User"))
+
+
+
+app.listen(PORT,()=>{console.log(`server is running on ${PORT}`);})
