@@ -1,8 +1,10 @@
 import  express  from "express";
 import dotenv from 'dotenv'
+import cors from "cors";
 
 const app=express();
 dotenv.config({path:"./config.env"});
+app.use(cors({origin:"*",credentials:true}));
 const PORT=process.env.PORT || 8000;
 app.route("/").get((req,res)=>{
     res.send("welcome to node app");
