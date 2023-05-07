@@ -5,7 +5,6 @@ app.use(bodyParser.json({limit:"10mb"}));
 // app.use(express.json({limit:"10mb"}));
 // app.use(express.urlencoded({extended:true,limit:"10mb"}));
 const cors=require("cors");
-const auth = require("./middleware/Auth");
 app.use(bodyParser.urlencoded({extended:true,limit:"10mb"}));
 app.use(cors({origin:["http://localhost:3000"],credentials:true}));
 const app=express();
