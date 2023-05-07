@@ -15,13 +15,12 @@ cloudinary.config({
 
 const PORT=process.env.PORT || 8000;
 app.use(bodyParser.json({limit:"10mb"}));
-// app.use(express.json({limit:"10mb"}));
-// app.use(express.urlencoded({extended:true,limit:"10mb"}));
+
 const cors=require("cors");
 const auth = require("./middleware/Auth");
 app.use(bodyParser.urlencoded({extended:true,limit:"10mb"}));
 // *************** for cors errror ********************
-app.use(cors({origin:["http://localhost:3000"],credentials:true}));
+app.use(cors({origin:"*",credentials:true}));
 app.use(cookieParser());
 startDatabase();
 app.get("/",(req,res)=>{
@@ -34,4 +33,4 @@ app.use("/api/v1/user",require("./routes/User"))
 
 
 
-app.listen(PORT,()=>{console.log(`server is running on ${PORT}`);})
+app.listen(PORT,()=>{})
