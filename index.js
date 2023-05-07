@@ -23,15 +23,26 @@ app.get("/get",async(req,res)=>{
    ...data
 });
     res.json({user})
-res.send(data);
+
 
 }
+
     
 catch(err) {
     res.json({success: false, error: err.message});
 }
 }
     )
+
+app.get("/data/:name",(req, res) => {
+    const {name} = req.params;
+        res.send({
+            name,
+            email:"ak122@gmail.com",
+            password:"password"
+        });
+    })
+
 app.listen(PORT,()=>{
     // console.log("App is running on ",PORT);
 })
