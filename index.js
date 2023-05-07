@@ -2,7 +2,6 @@ import  express  from "express";
 import dotenv from 'dotenv'
 import cors from "cors";
 import startDb from "./database.js";
-// const User =require("./user");
 import User from "./user.js";
 const app=express();
 dotenv.config({path:"./config.env"});
