@@ -16,7 +16,7 @@ app.route("/").get((req,res)=>{
 })
 app.get("/get",async(req,res)=>{
   try {
-    //  console.log("get is called");
+     console.log("get is called");
     const data={
         name:"bittu",
         email:"ak122@gmail.com",
@@ -47,5 +47,5 @@ app.get("/data/:name",(req, res) => {
     })
 
 app.listen(PORT,()=>{
-    // console.log("App is running on ",PORT);
+    console.log("App is running on ",PORT);
 })
