@@ -20,7 +20,7 @@ const cors=require("cors");
 const auth = require("./middleware/Auth");
 app.use(bodyParser.urlencoded({extended:true,limit:"10mb"}));
 // *************** for cors errror ********************
-app.use(cors({origin:"*",credentials:true}));
+app.use(cors({origin:["http://localhost:3000"],credentials:true}));
 app.use(cookieParser());
 startDatabase();
 app.get("/",(req,res)=>{
