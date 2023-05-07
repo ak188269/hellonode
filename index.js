@@ -14,6 +14,10 @@ startDb();
 app.route("/").get((req,res)=>{
     res.send("welcome to node app");
 })
+app.route("/env").get((req,res)=>{
+    res.send({env:process.env.DATABASE_URL});
+})
+
 app.get("/get",async(req,res)=>{
   try {
      console.log("get is called");
