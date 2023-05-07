@@ -47,5 +47,5 @@ app.get("/data/:name",(req, res) => {
     })
 
 app.listen(PORT,()=>{
-    console.log("App is running on ",PORT);
+    // console.log("App is running on ",PORT);
 })
