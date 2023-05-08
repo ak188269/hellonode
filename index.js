@@ -19,20 +19,16 @@ const PORT=process.env.PORT || 8000;
 app.use(bodyParser.json({limit:"10mb"}));
 app.use(express.json({limit:"10mb"}));
 app.use(express.urlencoded({extended:true,limit:"10mb"}));
-
-app.use(bodyParser.json({limit:"10mb"}));
-// app.use(express.json({limit:"10mb"}));
-// app.use(express.urlencoded({extended:true,limit:"10mb"}));
 const cors=require("cors");
 const auth = require("./middleware/Auth");
 app.use(bodyParser.urlencoded({extended:true,limit:"10mb"}));
 
 // *************** for cors errror ********************
-app.use(cors({origin:true,credentials:true}));
+app.use(cors({origin:["http://localhost:3000"],credentials:true}));
 app.use(cookieParser());
 startDatabase();
 
-app.use(express.static(path.join(__dirname,'./build')));
+app.use(express.static(path.join(__dirname,'../../frontend/build')));
 
 
 app.get("/node",(req,res)=>{
@@ -43,30 +39,13 @@ app.get("/node",(req,res)=>{
 app.use("/api/v1/post",require("./routes/Post"))
 app.use("/api/v1/user",require("./routes/User"))
 
-app.get("/set",(req,res) => {
-  res.cookie("vercel", "mycercelcookies", { maxAge: 3*5*3600, httpOnly: true });
-  // res.cookie("check","thisischeck")
-res.json({
-success: true,
-body:req.cookies,
-msg:"token "+req.cookies.jwt
-})
-}
-)
-app.get("/auth",(req,res) => {
 
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "./build/index.html"), function (err) {
+  res.sendFile(path.join(__dirname, "../../frontend/build/index.html"), function (err) {
     if (err) {
       res.status(500).send(err);
     }
   });
 });
-res.json({
-success: true,
-body:req.cookies,
-msg:"token "+req.cookies.vercel
-})
-}
-)
+
 app.listen(PORT,()=>{console.log(`server is running on ${PORT}`);})
