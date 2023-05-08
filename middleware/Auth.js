@@ -3,10 +3,11 @@ const jwt =require("jsonwebtoken");
 const auth = async (req, res, next) => {
     try{
         const token = req.cookies.jwt;
+        
         if (!token) {
         req.isVerified = false;
         req.user=false;
-           res.json({success:false,msg:"Please login first"})
+           res.json({success:false,msg:"Please login first",cookies:token})
     }
     else {
         let isVerified = await jwt.verify(token, process.env.JWT_SECRET_KEY);
