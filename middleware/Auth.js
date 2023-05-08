@@ -10,6 +10,7 @@ const auth = async (req, res, next) => {
            res.json({success:false,msg:"Please login first",cookies:"token "+req.cookies});
     }
     else {
+        console.log("token not present");
         let isVerified = await jwt.verify(token, process.env.JWT_SECRET_KEY);
         // console.log("isverified", isVerified);
         req.isVerified = !!isVerified;
