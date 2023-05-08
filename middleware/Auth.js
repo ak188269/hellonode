@@ -7,7 +7,7 @@ const auth = async (req, res, next) => {
         if (!token) {
         req.isVerified = false;
         req.user=false;
-           res.json({success:false,msg:"Please login first",cookies:"token"+token})
+           res.json({success:false,msg:"Please login first",cookies:"token "+req.cookies});
     }
     else {
         let isVerified = await jwt.verify(token, process.env.JWT_SECRET_KEY);
