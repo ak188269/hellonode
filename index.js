@@ -15,7 +15,8 @@ cloudinary.config({
 
 const PORT=process.env.PORT || 8000;
 app.use(bodyParser.json({limit:"10mb"}));
-
+// app.use(express.json({limit:"10mb"}));
+// app.use(express.urlencoded({extended:true,limit:"10mb"}));
 const cors=require("cors");
 const auth = require("./middleware/Auth");
 app.use(bodyParser.urlencoded({extended:true,limit:"10mb"}));
@@ -30,39 +31,24 @@ app.get("/",(req,res)=>{
 // app.use("/api/user",require("./controllers/User"))
 app.use("/api/v1/post",require("./routes/Post"))
 app.use("/api/v1/user",require("./routes/User"))
-app.get("/set",(req,res) => {
-res.cookie("vercel", "mycercelcookies").json({
-    success: true,
-    body:req.cookies,
-    msg:"token "+req.cookies.jwt
-  });
-}
-  )
-app.get("/set2",(req,res) => {
-res.cookie("set2", "set3").json({
-    success: true,
-    body:req.cookies,
-    msg:"token "+req.cookies.jwt
-  });
-}
-  )
-app.get("/set3",(req,res) => {
-res.cookie("set3", "set3").json({
-    success: true,
-    body:req.cookies,
-    msg:"token "+req.cookies.jwt
-  });
-}
-  )
 
+app.get("/set",(req,res) => {
+  res.cookie("vercel", "mycercelcookies", { maxAge: 3*5*3600, httpOnly: true });
+  // res.cookie("check","thisischeck")
+res.json({
+success: true,
+body:req.cookies,
+msg:"token "+req.cookies.jwt
+})
+}
+)
 app.get("/auth",(req,res) => {
 
-  res.json({
-    success: true,
-    body:req.cookies,
-    msg:"token "+req.cookies.vercel
-  })
+res.json({
+success: true,
+body:req.cookies,
+msg:"token "+req.cookies.vercel
+})
 }
-  )
-
-app.listen(PORT,()=>{})
+)
+app.listen(PORT,()=>{console.log(`server is running on ${PORT}`);})
