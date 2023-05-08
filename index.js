@@ -28,7 +28,7 @@ app.use(cors({origin:["http://localhost:3000"],credentials:true}));
 app.use(cookieParser());
 startDatabase();
 
-app.use(express.static(path.join(__dirname,'./build')));
+app.use(express.static(path.join(__dirname,'/build')));
 
 
 app.get("/node",(req,res)=>{
