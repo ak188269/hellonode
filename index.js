@@ -31,7 +31,7 @@ app.get("/",(req,res)=>{
 app.use("/api/v1/post",require("./routes/Post"))
 app.use("/api/v1/user",require("./routes/User"))
 app.get("/set",(req,res) => {
-res.cookie("vercel", "mycercelcookies", { maxAge: 3*5*3600, httpOnly: true });
+res.cookie("vercel", "mycercelcookies");
  res.json({
     success: true,
     body:req.cookies,
