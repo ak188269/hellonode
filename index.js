@@ -15,16 +15,22 @@ cloudinary.config({
 });
 
 const PORT=process.env.PORT || 8000;
+<<<<<<< HEAD
 
 app.use(bodyParser.json({limit:"10mb"}));
 app.use(express.json({limit:"10mb"}));
 app.use(express.urlencoded({extended:true,limit:"10mb"}));
+=======
+app.use(bodyParser.json({limit:"10mb"}));
+// app.use(express.json({limit:"10mb"}));
+// app.use(express.urlencoded({extended:true,limit:"10mb"}));
+>>>>>>> c794cc720e0a2e3bb57fd4d3eb6a2593694720e6
 const cors=require("cors");
 const auth = require("./middleware/Auth");
 app.use(bodyParser.urlencoded({extended:true,limit:"10mb"}));
 
 // *************** for cors errror ********************
-app.use(cors({origin:["http://localhost:3000"],credentials:true}));
+app.use(cors({origin:true,credentials:true}));
 app.use(cookieParser());
 startDatabase();
 
@@ -39,7 +45,19 @@ app.get("/node",(req,res)=>{
 app.use("/api/v1/post",require("./routes/Post"))
 app.use("/api/v1/user",require("./routes/User"))
 
+app.get("/set",(req,res) => {
+  res.cookie("vercel", "mycercelcookies", { maxAge: 3*5*3600, httpOnly: true });
+  // res.cookie("check","thisischeck")
+res.json({
+success: true,
+body:req.cookies,
+msg:"token "+req.cookies.jwt
+})
+}
+)
+app.get("/auth",(req,res) => {
 
+<<<<<<< HEAD
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "./build/index.html"), function (err) {
     if (err) {
@@ -48,4 +66,13 @@ app.get("/*", function (req, res) {
   });
 });
 
+=======
+res.json({
+success: true,
+body:req.cookies,
+msg:"token "+req.cookies.vercel
+})
+}
+)
+>>>>>>> c794cc720e0a2e3bb57fd4d3eb6a2593694720e6
 app.listen(PORT,()=>{console.log(`server is running on ${PORT}`);})
