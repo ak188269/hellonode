@@ -23,7 +23,6 @@ app.use(express.urlencoded({extended:true,limit:"10mb"}));
 app.use(bodyParser.json({limit:"10mb"}));
 // app.use(express.json({limit:"10mb"}));
 // app.use(express.urlencoded({extended:true,limit:"10mb"}));
->>>>>>> c794cc720e0a2e3bb57fd4d3eb6a2593694720e6
 const cors=require("cors");
 const auth = require("./middleware/Auth");
 app.use(bodyParser.urlencoded({extended:true,limit:"10mb"}));
