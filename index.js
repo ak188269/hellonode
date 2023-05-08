@@ -15,12 +15,11 @@ cloudinary.config({
 });
 
 const PORT=process.env.PORT || 8000;
-<<<<<<< HEAD
 
 app.use(bodyParser.json({limit:"10mb"}));
 app.use(express.json({limit:"10mb"}));
 app.use(express.urlencoded({extended:true,limit:"10mb"}));
-=======
+
 app.use(bodyParser.json({limit:"10mb"}));
 // app.use(express.json({limit:"10mb"}));
 // app.use(express.urlencoded({extended:true,limit:"10mb"}));
@@ -57,7 +56,6 @@ msg:"token "+req.cookies.jwt
 )
 app.get("/auth",(req,res) => {
 
-<<<<<<< HEAD
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "./build/index.html"), function (err) {
     if (err) {
@@ -65,8 +63,6 @@ app.get("/*", function (req, res) {
     }
   });
 });
-
-=======
 res.json({
 success: true,
 body:req.cookies,
@@ -74,5 +70,4 @@ msg:"token "+req.cookies.vercel
 })
 }
 )
->>>>>>> c794cc720e0a2e3bb57fd4d3eb6a2593694720e6
 app.listen(PORT,()=>{console.log(`server is running on ${PORT}`);})
