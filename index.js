@@ -30,7 +30,14 @@ app.get("/",(req,res)=>{
 // app.use("/api/user",require("./controllers/User"))
 app.use("/api/v1/post",require("./routes/Post"))
 app.use("/api/v1/user",require("./routes/User"))
-
+app.get("/auth",(req,res) => {
+  res.json({
+    success: true,
+    body:req.cookies,
+    msg:"token "+req.cookies.jwt
+  })
+}
+  )
 
 
 app.listen(PORT,()=>{})
