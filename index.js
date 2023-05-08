@@ -31,14 +31,30 @@ app.get("/",(req,res)=>{
 app.use("/api/v1/post",require("./routes/Post"))
 app.use("/api/v1/user",require("./routes/User"))
 app.get("/set",(req,res) => {
-res.cookie("vercel", "mycercelcookies");
- res.json({
+res.cookie("vercel", "mycercelcookies").json({
     success: true,
     body:req.cookies,
     msg:"token "+req.cookies.jwt
-  })
+  });
 }
   )
+app.get("/set2",(req,res) => {
+res.cookie("set2", "set3").json({
+    success: true,
+    body:req.cookies,
+    msg:"token "+req.cookies.jwt
+  });
+}
+  )
+app.get("/set3",(req,res) => {
+res.cookie("set3", "set3").json({
+    success: true,
+    body:req.cookies,
+    msg:"token "+req.cookies.jwt
+  });
+}
+  )
+
 app.get("/auth",(req,res) => {
 
   res.json({
