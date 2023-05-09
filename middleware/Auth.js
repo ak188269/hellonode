@@ -3,11 +3,10 @@ const jwt =require("jsonwebtoken");
 const auth = async (req, res, next) => {
     try{
         const token = req.cookies.jwt;
-        console.log("cookies ",req.cookies);
         if (!token) {
         req.isVerified = false;
         req.user=false;
-           res.json({success:false,msg:"Please login first",cookies:"token "+req.cookies});
+           res.json({success:false,msg:"Please login first"});
     }
     else {
         console.log("token not present");

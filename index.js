@@ -3,11 +3,11 @@ const app=express();
 const dotenv=require("dotenv");
 const jwt=require('jsonwebtoken');
 const bodyParser=require("body-parser");
+dotenv.config({path:"./config.env"});
 const cookieParser=require("cookie-parser");
 const startDatabase=require("./database/db");
 const cloudinary=require("cloudinary").v2;
 const path=require("path");
-dotenv.config({path:"./config.env"});
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
@@ -28,11 +28,7 @@ app.use(cors({origin:["http://localhost:3000"],credentials:true}));
 app.use(cookieParser());
 startDatabase();
 
-app.get("/",(req, res) => {
-  
-  res.render(path.join(__dirname,'/build/index.html'));
-}
-)
+
 app.use(express.static(path.join(__dirname,'/build')));
 
 
