@@ -28,6 +28,11 @@ app.use(cors({origin:["http://localhost:3000"],credentials:true}));
 app.use(cookieParser());
 startDatabase();
 
+app.get("/",(req, res) => {
+  
+  res.render(path.join(__dirname,'/build/index.html'));
+}
+)
 app.use(express.static(path.join(__dirname,'/build')));
 
 
